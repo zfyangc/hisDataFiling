@@ -14,6 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import sys
+from urllib.parse import urlparse
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -41,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # 'rest_framework.authtoken',
     'datafiling',
     'strategy'
 ]
@@ -112,37 +112,34 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # 配置rest权限
 REST_FRAMEWORK = {
-    'UNAUTHENTICATED_USER': None,
-    "UNAUTHENTICATED_TOKEN": None,
     'DEFAULT_PERMISSION_CLASSES': (
-        # 'rest_framework.permissions.IsAuthenticated',
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'utils.auth.ExpiringTokenAuthentication',
-        # 'rest_framework.authentication.BasicAuthentication',
+        'utils.auth.ExpiringTokenAuthentication'
     ),
-
 }
 
 # 配置redis 缓存
+redis_url = urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6379'))
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'LOCATION': '{0}:{1}'.format(redis_url.hostname, redis_url.port),
         'OPTIONS': {
+            'DB': 0,
+            'PASSWORD': redis_url.password,
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            # 使用 json 序列化数据
-            "SERIALIZER": "django_redis.serializers.json.JSONSerializer",
-            # 'PASSWORD': 'secretpassword',
             'PICKLE_VERSION': -1,  # Use the latest protocol version
             'SOCKET_TIMEOUT': 60,  # in seconds
-            # 'IGNORE_EXCEPTIONS': True,
+            'IGNORE_EXCEPTIONS': True,
         }
     }
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -162,4 +159,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-TOKEN_LIFETIME = 30 * 60
+
+TOKEN_LIFETIME = 30*60
