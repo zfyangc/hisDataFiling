@@ -19,7 +19,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'id', 'password', 'is_superuser', 'username', 'email', 'is_staff', 'is_active', 'date_joined',
+            'id', 'is_superuser', 'username', 'email', 'is_staff', 'is_active', 'date_joined',
             'is_staff_value', 'is_active_value'
         )
 

@@ -1,14 +1,13 @@
 # coding:utf-8
+import json
 import traceback
-
-from django.contrib.auth.models import User
 
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from utils.auth import ExpiringTokenAuthentication
+from apps.user.serializers import UserInfoSerializer
 
 # Create your views here.
 from utils.cache_manager import CacheManager
@@ -28,17 +27,20 @@ class LoginView(APIView):
 
     def post(self, request):
         req_data = request.data  # {"username":'', "password":''}
-        username = req_data.get('username', '')
-        password = req_data.get('password', '')
         code_str = req_data.get('code', '')
         code_uuid = req_data.get('uuid', '')
         result = {}
-        user_instance = User.objects.filter(username=username).first()
-        if user_instance:
-            if user_instance.password != password:
-                result['resullt'] = 'fail'
-                result['message'] = '密码错误'
-                return Response(data=result, status=Constants.HTTP_400_CODE)
+        # user = auth.authenticate(username=username, password=password)
+        # if user is None:
+        #     result['resullt'] = 'fail'
+        #     result['message'] = '此用户不存在'
+        #     return Response(data=result, status=Constants.HTTP_400_CODE)
+        # if not user.is_active:
+        #     result['resullt'] = 'fail'
+        #     result['message'] = '用户未激活'
+        #     return Response(data=result, status=Constants.HTTP_400_CODE)
+        # 清除验证码
+        try:
             code = CacheManager.get(code_uuid)
             CacheManager.delete(code_uuid)
             if not code:
@@ -53,11 +55,20 @@ class LoginView(APIView):
             serializer = self.serializer_class(data=request.data, context={'request': request})
             serializer.is_valid(raise_exception=True)
             user = serializer.validated_data['user']
-            _, _ = Token.objects.get_or_create(user=user)
+            user_token = Token.objects.get(user=user)
+            if user_token:
+                user_token.delete()
+                user_token, _ = Token.objects.get_or_create(user=user)
             try:
-                aa = ExpiringTokenAuthentication()
-                _, token = aa.authenticate(request)
-                result['token'] = token
+                result['token'] = user_token.key
+                result['user'] = UserInfoSerializer(user).data
+                result['user']['roles'] = ["dept:edit", "user:list", "storage:add", "redis:list", "dept:add", "storage:edit",
+                                   "menu:del", "roles:del", "admin", "storage:list", "job:edit", "user:del", "dict:add",
+                                   "redis:del", "dept:list", "timing:add", "job:list", "dict:del", "dict:list",
+                                   "job:add", "timing:list", "roles:add", "user:add", "pictures:list", "menu:edit",
+                                   "timing:edit", "menu:list", "storage:del", "roles:list", "pictures:del", "menu:add",
+                                   "job:del", "pictures:add", "user:edit", "roles:edit", "timing:del", "dict:edit",
+                                   "dept:del"]
                 result['resullt'] = 'success'
                 result['message'] = '登录成功'
                 return Response(data=result, status=Constants.HTTP_200_CODE)
@@ -66,8 +77,9 @@ class LoginView(APIView):
                 result['resullt'] = 'fail'
                 result['message'] = '用户权限认证失败'
                 return Response(data=result, status=Constants.HTTP_401_CODE)
-        else:
-            result = {'result': 'fail', 'message': "此用户不存在"}
+        except Exception as e:
+            traceback.print_exc()
+            result = {'result': 'fail', 'message': e}
             return Response(data=result, status=Constants.HTTP_400_CODE)
 
 
@@ -106,8 +118,9 @@ class ValidCodeInfoView(APIView):
     def get(self, request):
         vcm = ValidCodeManager(111, 36)
         type = 'data:image/png;base64,'
-        img_str = type+vcm.generateCodeImg()
+        img_str = type + vcm.generateCodeImg()
         codeRes = vcm.getCodeResult()
         uuid_str = 'code_key' + str(uuid.uuid1())[:8] + str(uuid.uuid4())[8:]
-        CacheManager.save(uuid_str, str(codeRes))
+        json.dumps(codeRes)
+        CacheManager.save(uuid_str, codeRes)
         return Response(data=ImageResult(img_str, uuid_str).__dict__, status=Constants.HTTP_200_CODE)

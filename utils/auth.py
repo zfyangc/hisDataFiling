@@ -4,10 +4,10 @@ from django.utils.translation import ugettext_lazy as _
 
 import datetime
 
+import pickle
 from rest_framework.authentication import BaseAuthentication
 from rest_framework import exceptions
 from rest_framework import HTTP_HEADER_ENCODING
-from rest_framework.authtoken.models import Token
 
 from hisDataFiling import settings
 from rest_framework.authtoken.serializers import AuthTokenSerializer
@@ -15,7 +15,6 @@ from rest_framework.schemas import AutoSchema
 from rest_framework import parsers, renderers
 import coreapi
 import coreschema
-
 
 def get_authorization_header(request):
     """
@@ -50,26 +49,28 @@ class ExpiringTokenAuthentication(BaseAuthentication):
         token_cache = 'token_' + key
         cache_user = cache.get(token_cache)
         if cache_user:
-            return (cache_user.user, cache_user)  # 首先查看token是否在缓存中，若存在，直接返回用户
+            token_obj = pickle.loads(cache_user)
 
-        try:
-            token = self.model.objects.get(key=key)
-        except self.model.DoesNotExist:
-            raise exceptions.AuthenticationFailed('认证失败')
+            # return (cache_user.user, cache_user)  # 首先查看token是否在缓存中，若存在，直接返回用户]
+        else:
+            try:
+                token_obj = model.objects.select_related('user').get(key=key)
+            except model.DoesNotExist:
+                raise exceptions.AuthenticationFailed(_('Invalid token.'))
 
-        if not token.user.is_active:
+        if not token_obj.user.is_active:
             raise exceptions.AuthenticationFailed('用户被禁止，请联系超级管理员')
 
         utc_now = datetime.datetime.utcnow()
-        if token.created < (utc_now - datetime.timedelta(seconds=settings.TOKEN_LIFETIME)).replace(
+        if token_obj.created < (utc_now - datetime.timedelta(seconds=settings.TOKEN_LIFETIME)).replace(
                 tzinfo=pytz.timezone('UTC')):  # 设定存活时间 30分钟
             raise exceptions.AuthenticationFailed('认证信息过期，请重新登录')
 
-        if token:
+        if token_obj:
             token_cache = 'token_' + key
-            cache.set(token_cache, token, 24 * 7 * 60 * 60)  # 添加 token_xxx 到缓存 7天
+            cache.set(token_cache, pickle.dumps(token_obj), 24 * 7 * 60 * 60)  # 添加 token_xxx 到缓存 7天
 
-        return (cache_user.user, cache_user)
+        return (token_obj.user, token_obj)
 
     def authenticate_header(self, request):
         return 'EL-ADMIN-TOEKN'

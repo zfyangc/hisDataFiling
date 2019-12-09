@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'rest_framework.authtoken',
     'datafiling',
-    'strategy'
+    'strategy',
+    'menu'
 ]
 
 MIDDLEWARE = [
@@ -117,8 +118,7 @@ REST_FRAMEWORK = {
     'UNAUTHENTICATED_USER': None,
     "UNAUTHENTICATED_TOKEN": None,
     'DEFAULT_PERMISSION_CLASSES': (
-        # 'rest_framework.permissions.IsAuthenticated',
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        # 'rest_framework.permissions.IsAuthenticatingdOrReadOnly',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'utils.auth.ExpiringTokenAuthentication',
@@ -135,7 +135,7 @@ CACHES = {
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
             # 使用 json 序列化数据
-            "SERIALIZER": "django_redis.serializers.json.JSONSerializer",
+            # "SERIALIZER": "django_redis.serializers.json.JSONSerializer",
             # 'PASSWORD': 'secretpassword',
             'PICKLE_VERSION': -1,  # Use the latest protocol version
             'SOCKET_TIMEOUT': 60,  # in seconds
