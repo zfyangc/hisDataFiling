@@ -15,11 +15,10 @@ Including another URLconf
 """
 from django.urls import path
 
-from apps.user.views import LogoutView, LoginView, UserInfoView, ValidCodeInfoView
+from apps.menu.views import MenuDownloadView, MenuBuildView, MenuTreeView
 
 urlpatterns = [
-    path('download/', LoginView.as_view()),
-    path('build/', LogoutView.as_view()),
-    path(r'tree/', UserInfoView.as_view()),
-    path(r'code/', ValidCodeInfoView.as_view()),
+    path('download/', MenuDownloadView.as_view()),
+    path('build/', MenuBuildView.as_view()),
+    path(r'tree/', MenuTreeView.as_view()),
 ]

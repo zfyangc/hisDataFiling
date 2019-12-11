@@ -62,13 +62,18 @@ class LoginView(APIView):
             try:
                 result['token'] = user_token.key
                 result['user'] = UserInfoSerializer(user).data
-                result['user']['roles'] = ["dept:edit", "user:list", "storage:add", "redis:list", "dept:add", "storage:edit",
-                                   "menu:del", "roles:del", "admin", "storage:list", "job:edit", "user:del", "dict:add",
-                                   "redis:del", "dept:list", "timing:add", "job:list", "dict:del", "dict:list",
-                                   "job:add", "timing:list", "roles:add", "user:add", "pictures:list", "menu:edit",
-                                   "timing:edit", "menu:list", "storage:del", "roles:list", "pictures:del", "menu:add",
-                                   "job:del", "pictures:add", "user:edit", "roles:edit", "timing:del", "dict:edit",
-                                   "dept:del"]
+                result['user']['roles'] = ["dept:edit", "user:list", "storage:add", "redis:list", "dept:add",
+                                           "storage:edit",
+                                           "menu:del", "roles:del", "admin", "storage:list", "job:edit", "user:del",
+                                           "dict:add",
+                                           "redis:del", "dept:list", "timing:add", "job:list", "dict:del", "dict:list",
+                                           "job:add", "timing:list", "roles:add", "user:add", "pictures:list",
+                                           "menu:edit",
+                                           "timing:edit", "menu:list", "storage:del", "roles:list", "pictures:del",
+                                           "menu:add",
+                                           "job:del", "pictures:add", "user:edit", "roles:edit", "timing:del",
+                                           "dict:edit",
+                                           "dept:del"]
                 result['resullt'] = 'success'
                 result['message'] = '登录成功'
                 return Response(data=result, status=Constants.HTTP_200_CODE)
@@ -92,7 +97,7 @@ class LogoutView(APIView):
         super().__init__(**kwargs)
 
     def delete(self, request):
-        pass
+        return Response(status=Constants.HTTP_200_CODE)
 
 
 class UserInfoView(APIView):
@@ -103,8 +108,16 @@ class UserInfoView(APIView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def get(self):
-        pass
+    def get(self, request):
+        result = {"id": 1, "is_superuser": True, "username": "root", "email": "", "is_staff": True, "is_active": True,
+                  "date_joined": "2019-11-26T04:25:37.348915Z", "is_staff_value": "具有管理后台权限", "is_active_value": "激活",
+                  "roles": ["dept:edit", "user:list", "storage:add", "redis:list", "dept:add", "storage:edit",
+                            "menu:del", "roles:del", "admin", "storage:list", "job:edit", "user:del", "dict:add",
+                            "redis:del", "dept:list", "timing:add", "job:list", "dict:del", "dict:list", "job:add",
+                            "timing:list", "roles:add", "user:add", "pictures:list", "menu:edit", "timing:edit",
+                            "menu:list", "storage:del", "roles:list", "pictures:del", "menu:add", "job:del",
+                            "pictures:add", "user:edit", "roles:edit", "timing:del", "dict:edit", "dept:del"]}
+        return Response(data=result, status=Constants.HTTP_200_CODE)
 
 
 class ValidCodeInfoView(APIView):

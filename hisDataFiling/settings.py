@@ -43,9 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'rest_framework.authtoken',
     'rest_framework.authtoken',
-    'datafiling',
-    'strategy',
-    'menu'
+    'menu',
+    'visits',
+    'log_manage',
 ]
 
 MIDDLEWARE = [

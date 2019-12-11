@@ -22,4 +22,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view()),
     path(r'info/', UserInfoView.as_view()),
     path(r'code/', ValidCodeInfoView.as_view()),
+    path(r'logout/', LogoutView.as_view()),
 ]
