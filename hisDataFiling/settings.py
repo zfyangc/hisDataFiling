@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'menu',
     'visits',
     'log_manage',
+    'auth',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -88,7 +90,7 @@ DATABASES = {
         'PASSWORD': 'root',
         'HOST': '127.0.0.1',
         'PORT': 3306,
-        'NAME': 'datamigration'
+        'NAME': 'data_archiving'
     },
     'sqlite3': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -165,3 +167,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TOKEN_LIFETIME = 30 * 60
+
+APPEND_SLASH=True
+
+
