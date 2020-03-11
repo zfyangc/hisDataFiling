@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="92142707-9c87-42e6-83c3-7a1dcb76bef5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../roles/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../roles/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../roles/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../roles/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sys_auth/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sys_auth/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sys_auth/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../utils/etl_job.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/hisDataFiling.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/hisDataFiling.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../roles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../sys_auth/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../roles/migrations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../sys_auth/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/../roles/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../sys_auth/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../sys_auth/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../log_manage/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../log_manage/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../log_manage/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../users/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../users/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../users/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../visits/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../visits/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../visits/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../hisDataFiling/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../hisDataFiling/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../hisDataFiling/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../hisDataFiling/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/writepatch.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/writepatch.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1VY8S0vLKSUb4RWF7nXMWSGfcdY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="92142707-9c87-42e6-83c3-7a1dcb76bef5" name="Default Changelist" comment="" />
+      <created>1577418663854</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1577418663854</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

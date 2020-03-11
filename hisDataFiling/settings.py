@@ -25,6 +25,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'e5q2eah3t1&a4rmldoiemqcu9v52rjhzb90rqx=z1has7)rl9b'
+AUTH_USER_MODEL = "users.User"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -34,20 +35,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # 'rest_framework.authtoken',
     'rest_framework.authtoken',
     'menu',
     'visits',
     'log_manage',
-    'auth',
+    'sys_auth',
     'users',
+    'roles',
 ]
 
 MIDDLEWARE = [
@@ -168,6 +169,5 @@ STATIC_URL = '/static/'
 
 TOKEN_LIFETIME = 30 * 60
 
-APPEND_SLASH=True
-
+APPEND_SLASH = True
 

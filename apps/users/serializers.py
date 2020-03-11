@@ -1,6 +1,8 @@
 # coding:utf-8
-from django.contrib.auth.models import User
 from rest_framework import serializers
+
+from roles.serializers import RoleSerializer
+from .models import User
 
 
 class UserInfoSerializer(serializers.ModelSerializer):
@@ -15,12 +17,13 @@ class UserInfoSerializer(serializers.ModelSerializer):
 
     is_staff_value = serializers.SerializerMethodField(method_name='get_is_staff')
     is_active_value = serializers.SerializerMethodField(method_name='get_is_active')
+    role = RoleSerializer()
 
     class Meta:
         model = User
         fields = (
             'id', 'is_superuser', 'username', 'email', 'is_staff', 'is_active', 'date_joined',
-            'is_staff_value', 'is_active_value'
+            'is_staff_value', 'is_active_value', 'role'
         )
 
     def get_is_staff(self, obj):

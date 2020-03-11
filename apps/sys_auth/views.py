@@ -7,9 +7,8 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from apps.user.serializers import UserInfoSerializer
-
 # Create your views here.
+from users.serializers import UserInfoSerializer
 from utils.cache_manager import CacheManager
 from utils.constants import Constants
 from utils.validcode_manager import ValidCodeManager, ImageResult
@@ -55,10 +54,12 @@ class LoginView(APIView):
             serializer = self.serializer_class(data=request.data, context={'request': request})
             serializer.is_valid(raise_exception=True)
             user = serializer.validated_data['user']
-            user_token = Token.objects.get(user=user)
-            if user_token:
+            try:
+                user_token = Token.objects.get(user=user)
                 user_token.delete()
-                user_token, _ = Token.objects.get_or_create(user=user)
+            except Exception:
+                pass
+            user_token, _ = Token.objects.get_or_create(user=user)
             try:
                 result['token'] = user_token.key
                 result['user'] = UserInfoSerializer(user).data

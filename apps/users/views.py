@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from apps.users.serializers import UserInfoSerializer
+from .serializers import UserInfoSerializer
 
 # Create your views here.
 from utils.constants import Constants
@@ -17,7 +17,7 @@ class UserView(APIView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         """
         用户列表查询
         :param request:

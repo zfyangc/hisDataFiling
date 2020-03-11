@@ -86,3 +86,9 @@ class ExpiringTokenAuthentication(BaseAuthentication):
 
     def authenticate_header(self, request):
         return self.keyword
+
+def get_provider(request):
+    if request.user and request.auth:
+        return request.user
+    else:
+        return None
