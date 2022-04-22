@@ -1,6 +1,6 @@
 requests
 pymysql==0.9.3
-Django==2.2.7
+Django==2.2.28
 djangorestframework==3.10.3
 mysqlclient==1.4.6
 markdown
